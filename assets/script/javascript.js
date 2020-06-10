@@ -6,3 +6,18 @@
 var quiz = document.getElementById("quiz");
 var startBtn = document.getElementById("start-btn");
 var score = document.getElementById("score-tracker");
+
+
+
+
+
+
+
+
+
+
+
+
+
+// This event listener is going to be linked to a function that is created to show the results of a user taking the quiz.
+score.addEventListener("click",);
