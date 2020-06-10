@@ -12,3 +12,4 @@ These are a list of the edits that I am making.
 ## Additional variable to store questions and answers in a object method
 ## Creation of a function to run the quiz, and a function to show the score of the quiz
 ## Button calling the quiz
+## Added css properties to look similar to example gif
