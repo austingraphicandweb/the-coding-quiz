@@ -56,7 +56,10 @@ var qna = [
 // A function to start the quiz and cycle through the questions
 function startGame(){
     // homeScreen.setAttribute("class", "hide");
-}
+   var document.getElementById("home-screen");
+   if (x.style.display.none === ""){
+        x.style.display
+   }
 
 // Function for the quiz
 function theQuiz(){}
@@ -71,3 +74,4 @@ theQuiz();
 score.addEventListener("click", function(){
     // insert the logic here
 });
+// document.getElementById("start-btn").onClick = startGame;

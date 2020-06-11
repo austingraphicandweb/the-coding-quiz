@@ -30,3 +30,6 @@ button {
 .hide {
     display: none;
 }
+#home-screen {
+    display: none;
+}
