@@ -47,39 +47,31 @@ var qna = [
     {
         question: "Commonly used data types DO NOT include:",
         choices:["strings", "booleans", "alerts","numbers"],
-        answer:"alerts"
+        answer: "alerts"
     },
 
     {
         question: "The condition in an if / else statement is enclosed within ______.",
-        1:"Quotes",
-        2:"curly brackets",
-        3:"parentheses",
-        4:"square brackets"
+        choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+        answer: "curly brackets"
     },
 
     {
         question: "Arrays in JavaScript can be used to store ______.",
-        1:"numbers and strings",
-        2:"other arrays",
-        3:"booleans",
-        4:"all of the above"
+        choices: ["numbers and strings", "other arrays", "booleans", "all of the above"],
+        answer: "all of the above"
     },
 
     {
         question: "String values must be enclosed within ______ when being assigned to variables.",
-        1:"commas",
-        2:"curly brackets",
-        3:"quotes",
-        4:"parentheses"
+        choices: ["commas", "curly brackets", "quotes", "parentheses"],
+        answer: "quotes"
     },
 
     {
        question:"A very useful tool used during development and debugging for printing content to the debugger is:",
-        1:"JavaScript",
-        2:"terminal/bash",
-        3:"for loops",
-        4:"console.log"
+       choices: ["JavaScript", "terminal/bash", "for loops", " console.log"],
+       answer: "console.log"
     }
 ];
 
@@ -90,17 +82,21 @@ function theQuiz(){
     questionElement.appendChild(h2El);
     console.log(qna[currentQuestion].question);
     for (i = 0; i < qna[currentQuestion].choices.length; i++) {
-        var buttonOne = document.createElement("button");
-        buttonOne.textContent = qna[currentQuestion].choices[i];
-        //change to javascript for adding an element
-        // questionItems.text(qna[i]);
-        //change to javascript for appending
-        
         console.log(qna[currentQuestion].choices[i]);
-    }
+        var buttonEl = document.createElement("button");
+        questionElement.append(buttonEl);
+        buttonEl.textContent = qna[currentQuestion].choices[i];
+        buttonEl.style.display= "block";
+        buttonEl.style.margin= "10px";
+        }
 }
 
 // Function to get the results of the quiz
 function theScore(){}
 
 startBtn.addEventListener("click", startGame);
+
+// possible option for showing the answer choices
+// var buttonEl = document.createElement("button");
+// questionElement.append(buttonEl);
+// buttonEl.textContent = qna[currentQuestion].answer[i];
