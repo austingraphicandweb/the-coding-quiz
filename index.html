@@ -11,28 +11,28 @@
     <header>
         <p>View highscores</p>
         <!--Timer is made in js and manipulated through DOM--> 
-        <div id="timer">Time:</div>
+        <div id="timer"></div>
+        <div id="score-tracker"></div>
     </header>
     <main id="home-screen">
+
         <!--This section contains the header and instructions-->
         <section id="description">
             <h1>Coding Quiz Challenge</h1>
             <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
         </section>
+
         <!--This section contains the quiz div, start button, and score tracker div-->
         <section id="interaction">
-            <div id="quiz"></div>
             <button id="start-btn">Start Quiz</button>
-            <div id="score-tracker"></div>
-        </section>
-        <!--Append questions to this section -->
-        <section id="questions"></section>
-        <section id="score">
-            <button id="submit"></button>
-            <button id="go-back"></button>
-            <button id="clear-score"></button>
         </section>
     </main>
+
+        <!--Append questions to this section -->
+        <section id="questions"></section>
+
+       <!--This is the score section. It comes after the quiz ends to display the score.-->
+        <section id="score"></section>
     <!--Javascript tag-->
     <script src="./assets/script/javascript.js"></script>
 </body>
