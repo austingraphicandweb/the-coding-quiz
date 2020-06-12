@@ -12,6 +12,7 @@ var clear = document.getElementById("clear-score");
 var questionElement = document.getElementById("questions");
 var theTimer = document.getElementById("timer");
 var currentQuestion = 0;
+var timeLeft = 60;
 
 // Start game. A function that clears the homescreen and calls the quiz and timer.
 function startGame(){
@@ -29,7 +30,6 @@ function startGame(){
 
 // Timer. The timer was based off of an activity done in class. I am using a function that contains a variable describing the time left and another variable that defines the interval of time that is being counted down. the last part of this function is a conditional statement that clears the interval after it has reached zero.
 function timer(){
-    var timeLeft = 60;
     var interval = setInterval(function()
     {theTimer.textContent = timeLeft + " seconds left.";
     timeLeft--;
@@ -77,6 +77,8 @@ var qna = [
 
 // The quiz
 function theQuiz(){
+    questionElement.textContent = "";
+    questionElement.style.display = "block";
     var h2El = document.createElement("h2");
     h2El.textContent = qna[currentQuestion].question
     questionElement.appendChild(h2El);
@@ -88,15 +90,29 @@ function theQuiz(){
         buttonEl.textContent = qna[currentQuestion].choices[i];
         buttonEl.style.display= "block";
         buttonEl.style.margin= "10px";
+        buttonEl.addEventListener("click", quizButtons);
         }
+}
+
+function quizButtons(){
+    if (qna[currentQuestion].answer === event.target.textContent){
+            console.log("correct!");
+
+    } else {
+        timeLeft-=15;
+    };
+    if (currentQuestion < qna.length-1){
+        currentQuestion++;
+        theQuiz();
+    //local storage information goes into this else statement.
+    }else {
+        
+    }
 }
 
 // Function to get the results of the quiz
 function theScore(){}
 
-startBtn.addEventListener("click", startGame);
+function highScores(){}
 
-// possible option for showing the answer choices
-// var buttonEl = document.createElement("button");
-// questionElement.append(buttonEl);
-// buttonEl.textContent = qna[currentQuestion].answer[i];
+startBtn.addEventListener("click", startGame);
