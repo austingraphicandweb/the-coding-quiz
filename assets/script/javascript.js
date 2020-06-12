@@ -116,8 +116,3 @@ function theScore(){}
 function highScores(){}
 
 startBtn.addEventListener("click", startGame);
-
-// possible option for showing the answer choices
-// var buttonEl = document.createElement("button");
-// questionElement.append(buttonEl);
-// buttonEl.textContent = qna[currentQuestion].answer[i];
