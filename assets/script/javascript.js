@@ -2,13 +2,13 @@
  * The Coding Game Javascript File
  */
 
- // Global Elements are used throughout the js script. I am getting elements from my html page.
+// Global Elements are used throughout the js script. I am getting elements from my html page.
+// var score = document.getElementById("score-tracker");
+// var homeScreen = document.getElementById("home-screen");
+// var submit = document.getElementById("submit");
+// var goBack = document.getElementById("go-back");
+// var clear = document.getElementById("clear-score");
 var startBtn = document.getElementById("start-btn");
-var score = document.getElementById("score-tracker");
-var homeScreen = document.getElementById("home-screen");
-var submit = document.getElementById("submit");
-var goBack = document.getElementById("go-back");
-var clear = document.getElementById("clear-score");
 var questionElement = document.getElementById("questions");
 var theTimer = document.getElementById("timer");
 var enterInitials = document.getElementById("score");
@@ -21,11 +21,6 @@ function startGame(){
 
     // I am creating a function that starts the game when button is clicked. First, I call the document and get the "welcome" div element by id. Then I set the id to .innerHTML so that I can replace the content. I replace the content with "" so that there is nothing inside of the div.
     document.getElementById("home-screen").innerHTML = "";
-
-    // I then want to target the start button. I call the document and get the #start-btn. I add an event listener to the string so that an action is taken when #start-btn is clicked. I set the arguments to "click" as the event type and then lastly outside of the callback function i insert a call to the startGame() function itself.
-    startBtn.addEventListener("click", function(){
-        console.log("this function is working");
-    });
     theQuiz();
     timer();
 }
@@ -85,10 +80,8 @@ function theQuiz(){
     var h2El = document.createElement("h2");
     h2El.textContent = qna[currentQuestion].question
     questionElement.appendChild(h2El);
-    // console.log(qna[currentQuestion].question);
     // this for loop is to cycle through the questions and answers.
     for (i = 0; i < qna[currentQuestion].choices.length; i++) {
-        // console.log(qna[currentQuestion].choices[i]);
         var buttonEl = document.createElement("button");
         questionElement.append(buttonEl);
         buttonEl.textContent = qna[currentQuestion].choices[i];
@@ -98,10 +91,7 @@ function theQuiz(){
         }
     if (qna[currentQuestion] === [4]) {
         qna[currentQuestion].answer.onClick = questionElement.textContent = "";
-        console.log("testing");
         theScore();
-        //could use innerHTML instead of textContent
-        // theQuiz.innerHTML = "";
     }
 }
 
@@ -114,15 +104,9 @@ function quizButtons(){
     };
     currentQuestion++;
     theQuiz();
-    // if (currentQuestion < qna.length){
-    // //local storage information goes into this else statement.
-    // }else {
-        
-    // }
     if(currentQuestion === qna.length){
         theQuiz.textContent = "";
         theScore();
-        console.log("you have reached the end of the quiz");
     }
 }
 
@@ -138,9 +122,6 @@ function theScore(){
     enterInitials.appendChild(h1El);
     enterInitials.appendChild(h3El);
 }
-
-// current question index ==== 5 then run theScore(); 
-
 
 // After my initials have been entered in and the "submit" button has been clicked, the highscore page appears and lets me see my score and the score of anyone else that has taken the quiz also. The information is stored in local storage.
 function highScores(){
