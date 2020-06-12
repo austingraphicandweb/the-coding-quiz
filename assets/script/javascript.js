@@ -11,6 +11,8 @@ var goBack = document.getElementById("go-back");
 var clear = document.getElementById("clear-score");
 var questionElement = document.getElementById("questions");
 var theTimer = document.getElementById("timer");
+var enterInitials = document.getElementById("score");
+var highScores = document.getElementById("highscores");
 var currentQuestion = 0;
 var timeLeft = 60;
 
@@ -34,9 +36,10 @@ function timer(){
     {theTimer.textContent = timeLeft + " seconds left.";
     timeLeft--;
 
-    if (timeLeft === 0){
+    if (timeLeft <= 0){
         theTimer.textContent = "";
         clearInterval(interval);
+        theQuiz.textContent = "";
     }
     
     }, 1000);
@@ -82,9 +85,10 @@ function theQuiz(){
     var h2El = document.createElement("h2");
     h2El.textContent = qna[currentQuestion].question
     questionElement.appendChild(h2El);
-    console.log(qna[currentQuestion].question);
+    // console.log(qna[currentQuestion].question);
+    // this for loop is to cycle through the questions and answers.
     for (i = 0; i < qna[currentQuestion].choices.length; i++) {
-        console.log(qna[currentQuestion].choices[i]);
+        // console.log(qna[currentQuestion].choices[i]);
         var buttonEl = document.createElement("button");
         questionElement.append(buttonEl);
         buttonEl.textContent = qna[currentQuestion].choices[i];
@@ -92,27 +96,58 @@ function theQuiz(){
         buttonEl.style.margin= "10px";
         buttonEl.addEventListener("click", quizButtons);
         }
+    if (qna[currentQuestion] === [4]) {
+        qna[currentQuestion].answer.onClick = questionElement.textContent = "";
+        console.log("testing");
+        theScore();
+        //could use innerHTML instead of textContent
+        // theQuiz.innerHTML = "";
+    }
 }
 
 function quizButtons(){
     if (qna[currentQuestion].answer === event.target.textContent){
-            console.log("correct!");
+            alert("correct!");
 
     } else {
         timeLeft-=15;
     };
-    if (currentQuestion < qna.length-1){
-        currentQuestion++;
-        theQuiz();
-    //local storage information goes into this else statement.
-    }else {
+    currentQuestion++;
+    theQuiz();
+    // if (currentQuestion < qna.length){
+    // //local storage information goes into this else statement.
+    // }else {
         
+    // }
+    if(currentQuestion === qna.length){
+        theQuiz.textContent = "";
+        theScore();
+        console.log("you have reached the end of the quiz");
     }
 }
 
-// Function to get the results of the quiz
-function theScore(){}
+// Function to get the results of the quiz. After the last answer is chosen, the quiz is cleared, "game over is displayed", my final score is displayed, and a box for entering in my initials is displayed.
+function theScore(){
+    theScore.textContent = "";
+    var h1El = document.createElement("h1");
+    h1El.textContent = "Game Over";
+    var h3El = document.createElement("h3");
+    h3El.textContent = "Please enter your score";
+    var formBox = document.createElement("form");
+    formBox.textContent = "";
+    enterInitials.appendChild(h1El);
+    enterInitials.appendChild(h3El);
+}
 
-function highScores(){}
+// current question index ==== 5 then run theScore(); 
+
+
+// After my initials have been entered in and the "submit" button has been clicked, the highscore page appears and lets me see my score and the score of anyone else that has taken the quiz also. The information is stored in local storage.
+function highScores(){
+    highScores.textContent = "";
+    var highscoreHead = document.createElement("h1");
+    highscoreHead.textContent = "Highscores";
+
+}
 
 startBtn.addEventListener("click", startGame);
