@@ -34,10 +34,11 @@ function timer(){
     if (timeLeft <= 0){
         theTimer.textContent = "";
         clearInterval(interval);
-        theQuiz.textContent = "";
+        theScore();
     }
     
     }, 1000);
+    
 }
 
 // Question and answers
@@ -78,7 +79,7 @@ function theQuiz(){
     questionElement.textContent = "";
     questionElement.style.display = "block";
     var h2El = document.createElement("h2");
-    h2El.textContent = qna[currentQuestion].question
+    h2El.textContent = qna[currentQuestion].question;
     questionElement.appendChild(h2El);
     // this for loop is to cycle through the questions and answers.
     for (i = 0; i < qna[currentQuestion].choices.length; i++) {
@@ -91,9 +92,10 @@ function theQuiz(){
         }
     if (qna[currentQuestion] === [4]) {
         qna[currentQuestion].answer.onClick = questionElement.textContent = "";
-        theScore();
     }
+   
 }
+
 
 function quizButtons(){
     if (qna[currentQuestion].answer === event.target.textContent){
@@ -104,15 +106,15 @@ function quizButtons(){
     };
     currentQuestion++;
     theQuiz();
-    if(currentQuestion === qna.length){
-        theQuiz.textContent = "";
-        theScore();
-    }
+    // if(currentQuestion === qna.length){
+    //     theQuiz.textContent = "";
+    //     theScore();
+    // }
 }
 
 // Function to get the results of the quiz. After the last answer is chosen, the quiz is cleared, "game over is displayed", my final score is displayed, and a box for entering in my initials is displayed.
 function theScore(){
-    theScore.textContent = "";
+    // the.textContent = "";
     var h1El = document.createElement("h1");
     h1El.textContent = "Game Over";
     var h3El = document.createElement("h3");
