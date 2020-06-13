@@ -10,7 +10,7 @@ link:
 
 ## Screenshot
 
-![screenshot](/Screen-Shot.png)
+![screenshot](/assets/Screen-Shot.png)
 
 <hr>
 
