@@ -31,13 +31,13 @@ function timer(){
     {theTimer.textContent = timeLeft + " seconds left.";
     timeLeft--;
 
-    if (timeLeft <= 0 || qna === [5]){
+    if (timeLeft <= 0 || qna >= [4]){
         theTimer.textContent = "";
         clearInterval(interval);
-        qna[currentQuestion].addEventListener("click", function() {
-            // theQuiz.textContent="";
-            alert("making sure that this is working");
-        })
+        // qna[currentQuestion].addEventListener("click", function() {
+        //     // theQuiz.textContent="";
+        //     alert("making sure that this is working");
+        // })
     }
     
     }, 1000);
@@ -78,9 +78,9 @@ var qna = [
 
 // The quiz
 function theQuiz(){
+    var h2El = document.createElement("h2");
     questionElement.textContent = "";
     questionElement.style.display = "block";
-    var h2El = document.createElement("h2");
     h2El.textContent = qna[currentQuestion].question;
     questionElement.appendChild(h2El);
     // this for loop is to cycle through the questions and answers.
@@ -118,11 +118,12 @@ function quizButtons(){
 function theScore(){
     // the.textContent = "";
     var h1El = document.createElement("h1");
-    h1El.textContent = "Game Over";
     var h3El = document.createElement("h3");
-    h3El.textContent = "Please enter your score";
+    var h3El = document.createElement("h3");
     var formBox = document.createElement("form");
     formBox.textContent = "";
+    h1El.textContent = "Game Over";
+    h3El.textContent = "Please enter your score";
     enterInitials.appendChild(h1El);
     enterInitials.appendChild(h3El);
 }
@@ -130,19 +131,15 @@ function theScore(){
 // setting up local storage that will run along with the quiz to store the results....
 // in this first line of code I am declaring a variable that is equal to my object variable containing my questions
 var storage = JSON.stringify(qna);
-// now I am going to set up the local storage so that it displays the value of 'qna' in the console when the web page is opened
-localStorage.setItem("qna", storage);
-// testing to make sure that it shows up in the console when it is run
-console.log(localStorage);
 // now I am going to create a variables that takes apart the stringify and makes it look like a regular object again
 var storageOrganized = JSON.parse(localStorage.getItem("qna"));
-// lastly I am goign to console.log the second variable to make sure that it runs properly
-console.log(storageOrganized);
+// now I am going to set up the local storage so that it displays the value of 'qna' in the console when the web page is opened
+localStorage.setItem("qna", storage);
 
 // After my initials have been entered in and the "submit" button has been clicked, the highscore page appears and lets me see my score and the score of anyone else that has taken the quiz also. The information is stored in local storage.
 function highScores(){
-    highScores.textContent = "";
     var highscoreHead = document.createElement("h1");
+    highScores.textContent = "";
     highscoreHead.textContent = "Highscores";
 
 }
