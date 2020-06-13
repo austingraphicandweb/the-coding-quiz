@@ -31,15 +31,18 @@ function timer(){
     {theTimer.textContent = timeLeft + " seconds left.";
     timeLeft--;
 
-    if (timeLeft <= 0){
+    if (timeLeft <= 0 || qna === [5]){
         theTimer.textContent = "";
         clearInterval(interval);
-        theQuiz.textContent = "";
+        qna[currentQuestion].addEventListener("click", function() {
+            // theQuiz.textContent="";
+            alert("making sure that this is working");
+        })
     }
     
     }, 1000);
+    
 }
-
 // Question and answers
 var qna = [
     {
@@ -78,7 +81,7 @@ function theQuiz(){
     questionElement.textContent = "";
     questionElement.style.display = "block";
     var h2El = document.createElement("h2");
-    h2El.textContent = qna[currentQuestion].question
+    h2El.textContent = qna[currentQuestion].question;
     questionElement.appendChild(h2El);
     // this for loop is to cycle through the questions and answers.
     for (i = 0; i < qna[currentQuestion].choices.length; i++) {
@@ -91,9 +94,10 @@ function theQuiz(){
         }
     if (qna[currentQuestion] === [4]) {
         qna[currentQuestion].answer.onClick = questionElement.textContent = "";
-        theScore();
     }
+   
 }
+
 
 function quizButtons(){
     if (qna[currentQuestion].answer === event.target.textContent){
@@ -104,15 +108,15 @@ function quizButtons(){
     };
     currentQuestion++;
     theQuiz();
-    if(currentQuestion === qna.length){
-        theQuiz.textContent = "";
-        theScore();
-    }
+    // if(currentQuestion === qna.length){
+    //     theQuiz.textContent = "";
+    //     theScore();
+    // }
 }
 
 // Function to get the results of the quiz. After the last answer is chosen, the quiz is cleared, "game over is displayed", my final score is displayed, and a box for entering in my initials is displayed.
 function theScore(){
-    theScore.textContent = "";
+    // the.textContent = "";
     var h1El = document.createElement("h1");
     h1El.textContent = "Game Over";
     var h3El = document.createElement("h3");
@@ -123,6 +127,18 @@ function theScore(){
     enterInitials.appendChild(h3El);
 }
 
+// setting up local storage that will run along with the quiz to store the results....
+// in this first line of code I am declaring a variable that is equal to my object variable containing my questions
+var storage = JSON.stringify(qna);
+// now I am going to set up the local storage so that it displays the value of 'qna' in the console when the web page is opened
+localStorage.setItem("qna", storage);
+// testing to make sure that it shows up in the console when it is run
+console.log(localStorage);
+// now I am going to create a variables that takes apart the stringify and makes it look like a regular object again
+var storageOrganized = JSON.parse(localStorage.getItem("qna"));
+// lastly I am goign to console.log the second variable to make sure that it runs properly
+console.log(storageOrganized);
+
 // After my initials have been entered in and the "submit" button has been clicked, the highscore page appears and lets me see my score and the score of anyone else that has taken the quiz also. The information is stored in local storage.
 function highScores(){
     highScores.textContent = "";
@@ -132,3 +148,5 @@ function highScores(){
 }
 
 startBtn.addEventListener("click", startGame);
+
+ 
