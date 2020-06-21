@@ -31,7 +31,7 @@ function timer(){
     {theTimer.textContent = timeLeft + " seconds left.";
     timeLeft--;
 
-    if (timeLeft <= 0 || qna >= [4]){
+    if (timeLeft <= 0){
         theTimer.textContent = "";
         clearInterval(interval);
         // qna[currentQuestion].addEventListener("click", function() {
