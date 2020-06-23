@@ -2,12 +2,7 @@
  * The Coding Game Javascript File
  */
 
-// Global Elements are used throughout the js script. I am getting elements from my html page.
-// var score = document.getElementById("score-tracker");
-// var homeScreen = document.getElementById("home-screen");
-// var submit = document.getElementById("submit");
-// var goBack = document.getElementById("go-back");
-// var clear = document.getElementById("clear-score");
+// Global Elements are used throughout the js script.
 var startBtn = document.getElementById("start-btn");
 var questionElement = document.getElementById("questions");
 var theTimer = document.getElementById("timer");
@@ -27,17 +22,13 @@ function startGame(){
 
 // Timer. The timer was based off of an activity done in class. I am using a function that contains a variable describing the time left and another variable that defines the interval of time that is being counted down. the last part of this function is a conditional statement that clears the interval after it has reached zero.
 function timer(){
-    var interval = setInterval(function()
-    {theTimer.textContent = timeLeft + " seconds left.";
-    timeLeft--;
-
-    if (timeLeft <= 0){
+    var interval = setInterval(function(){
+        theTimer.textContent = timeLeft + " seconds left.";
+        timeLeft--;
+        if (timeLeft <= 0){
         theTimer.textContent = "";
         clearInterval(interval);
-        // qna[currentQuestion].addEventListener("click", function() {
-        //     // theQuiz.textContent="";
-        //     alert("making sure that this is working");
-        // })
+        endOfQuiz();
     }
     
     }, 1000);
@@ -78,7 +69,8 @@ var qna = [
 
 // The quiz
 function theQuiz(){
-    var h2El = document.createElement("h2");
+    if (currentQuestion < 4){
+        var h2El = document.createElement("h2");
     questionElement.textContent = "";
     questionElement.style.display = "block";
     h2El.textContent = qna[currentQuestion].question;
@@ -92,8 +84,12 @@ function theQuiz(){
         buttonEl.style.margin= "10px";
         buttonEl.addEventListener("click", quizButtons);
         }
-    if (qna[currentQuestion] === [4]) {
+    
+    }
+    if (currentQuestion === 4) {
         qna[currentQuestion].answer.onClick = questionElement.textContent = "";
+        alert("Correct!");
+        endOfQuiz();
     }
    
 }
@@ -108,24 +104,21 @@ function quizButtons(){
     };
     currentQuestion++;
     theQuiz();
-    // if(currentQuestion === qna.length){
-    //     theQuiz.textContent = "";
-    //     theScore();
-    // }
 }
 
 // Function to get the results of the quiz. After the last answer is chosen, the quiz is cleared, "game over is displayed", my final score is displayed, and a box for entering in my initials is displayed.
-function theScore(){
-    // the.textContent = "";
-    var h1El = document.createElement("h1");
-    var h3El = document.createElement("h3");
-    var h3El = document.createElement("h3");
-    var formBox = document.createElement("form");
-    formBox.textContent = "";
-    h1El.textContent = "Game Over";
-    h3El.textContent = "Please enter your score";
-    enterInitials.appendChild(h1El);
-    enterInitials.appendChild(h3El);
+function endOfQuiz(){
+
+    function theScore(){
+        enterInitials.style.display= "block";
+    }
+    // function highScores(){
+    //     var highscoreHead = document.createElement("h1");
+    //     highScores.textContent = "";
+    //     highscoreHead.textContent = "Highscores";
+    
+    // }
+    theScore();
 }
 
 // setting up local storage that will run along with the quiz to store the results....
@@ -135,7 +128,6 @@ var storage = JSON.stringify(qna);
 var storageOrganized = JSON.parse(localStorage.getItem("qna"));
 // now I am going to set up the local storage so that it displays the value of 'qna' in the console when the web page is opened
 localStorage.setItem("qna", storage);
-
 // After my initials have been entered in and the "submit" button has been clicked, the highscore page appears and lets me see my score and the score of anyone else that has taken the quiz also. The information is stored in local storage.
 function highScores(){
     var highscoreHead = document.createElement("h1");
